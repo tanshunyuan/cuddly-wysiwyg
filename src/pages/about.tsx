@@ -1,4 +1,5 @@
 import { Plate } from '@udecode/plate';
+import Navbar from '../components/Navbar';
 import {
   createBasicMarksPlugin,
   createBlockquotePlugin,
@@ -73,10 +74,7 @@ const plugins = createPlugins(
 const About = () => {
   return (
     <div>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-      </nav>
+      <Navbar />
       <Plate
         plugins={plugins}
         initialValue={initialValue}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Navbar from '../components/Navbar';
 import {
   createBasicMarksPlugin,
   createBlockquotePlugin,
@@ -16,7 +16,6 @@ import {
 import styles from '@/styles/Home.module.css';
 import BasicElementToolbarButtons from '@/components/BasicElementToolbarButtons';
 import BasicMarkToolbarButtons from '@/components/BasicMarkToolbar';
-import Link from 'next/link';
 export default function Home() {
   const editableProps = {
     placeholder: `Type…`,
@@ -24,11 +23,6 @@ export default function Home() {
       padding: `15px`,
     },
   };
-  // const initialValue = [
-  //   {
-  //     children: [{ text: `Some text to testing`, type: 'p' }],
-  //   },
-  // ];
   const [debugValue, setDebugValue] = useState(null);
 
   const components = createPlateUI();
@@ -49,11 +43,8 @@ export default function Home() {
   );
 
   return (
-    <div className={styles.container}>
-      <nav>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-      </nav>
+    <div>
+      <Navbar />
       <div>
         <HeadingToolbar>
           <BasicElementToolbarButtons />

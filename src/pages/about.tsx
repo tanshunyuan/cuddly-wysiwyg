@@ -11,7 +11,6 @@ import {
   createPlugins,
   createTodoListPlugin,
 } from '@udecode/plate';
-import Link from 'next/link';
 const initialValue = [
   { type: `h1`, children: [{ text: `Heading 1` }] },
   { type: `h2`, children: [{ text: `Heading 2` }] },

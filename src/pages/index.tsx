@@ -13,7 +13,6 @@ import {
   HeadingToolbar,
   Plate,
 } from '@udecode/plate';
-import styles from '@/styles/Home.module.css';
 import BasicElementToolbarButtons from '@/components/BasicElementToolbarButtons';
 import BasicMarkToolbarButtons from '@/components/BasicMarkToolbar';
 export default function Home() {

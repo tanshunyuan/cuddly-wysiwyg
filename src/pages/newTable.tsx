@@ -1,15 +1,51 @@
 import Navbar from '@/components/Navbar';
 import styled from '@emotion/styled';
+import React, { MouseEventHandler, useState } from 'react';
 import TableData from '../lib/table.data';
 
 const NewTable = () => {
+  const newTableData = TableData.map((x) => {
+    x.isChecked = false;
+    return x;
+  });
+  const [meme, setMeme] = useState(newTableData);
+
+  const handlePreviewOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { id, checked } = event.target;
+    const newMeme = meme.map((x) => {
+      return { ...x, isChecked: checked };
+    });
+    setMeme(newMeme);
+    console.log(id, checked);
+  };
+  const handleServiceItemOnChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { id, checked } = event.target;
+    const newShit = meme.map((x) => {
+      if (x.id.toString() == id) {
+        return { ...x, isChecked: checked };
+      } else {
+        return x;
+      }
+    });
+    setMeme(newShit);
+
+    console.log(id, checked);
+  };
   return (
     <div>
       <Navbar />
       <ServiceTable>
         <ServiceTableHeader>
           <ServiceTableRow>
-            <Input type="checkbox" />
+            <Input
+              onChange={handlePreviewOnChange}
+              id="preview"
+              type="checkbox"
+            />
             <ServiceTableHeaderCell>
               <p>Preview</p>
             </ServiceTableHeaderCell>
@@ -20,11 +56,16 @@ const NewTable = () => {
         </ServiceTableHeader>
 
         <ServiceTableContent>
-          {TableData.map((x) => {
+          {meme.map((x) => {
             return (
               <ServiceTableRowWrapper key={x.id}>
                 <ServiceTableRow>
-                  <Input type="checkbox" />
+                  <Input
+                    checked={x.isChecked}
+                    id={`${x.id}`}
+                    onChange={handleServiceItemOnChange}
+                    type="checkbox"
+                  />
                   <ServiceTableCell>
                     <Circle />
                     <p>{x.title}</p>

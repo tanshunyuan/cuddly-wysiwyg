@@ -2,6 +2,7 @@ interface ITableData {
   id: number;
   title: string;
   ratings: number;
+  isChecked?: boolean;
 }
 const data: ITableData[] = [
   {

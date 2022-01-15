@@ -2,9 +2,14 @@
   background: black;
   color: #fff;
 }
-/* Basic editor styles */
+.ProseMirror{
+  padding:0 10px;
+}
 .ProseMirror > * + * {
   margin-top: 0.75em;
+}
+.ProseMirror:focus {
+  outline: none;
 }
 .ProseMirror ul,
 ol {

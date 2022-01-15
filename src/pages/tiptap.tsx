@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import styled from '@emotion/styled';
 import Placeholder from '@tiptap/extension-placeholder';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -23,15 +24,35 @@ const TipTap = () => {
   return (
     <div>
       <Navbar />
-      <div>
-        <MenuBar editor={editor} />
-        <EditorContent editor={editor} />
-      </div>
-      <pre>{JSON.stringify(editor?.getJSON(), null, 2)}</pre>
+      <TipTapContainer>
+        <MenuBarContainer>
+          <MenuBar editor={editor} />
+        </MenuBarContainer>
+        <EditorContainer>
+          <EditorContent editor={editor} />
+        </EditorContainer>
+      </TipTapContainer>
+      <pre>{JSON.stringify(editor?.getHTML(), null, 2)}</pre>
     </div>
   );
 };
-
+const TipTapContainer = styled.div`
+  border: 1px solid black;
+  border-radius: 4px;
+`;
+const MenuBarContainer = styled.div`
+  display: flex;
+  border-bottom: 1px solid black;
+  padding: 1rem 0.5rem;
+  button {
+    margin-right: 8px;
+  }
+`;
+const EditorContainer = styled.div`
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 8px 8px 16px 8px;
+`;
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) return null;
   return (

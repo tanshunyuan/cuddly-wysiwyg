@@ -1,16 +1,8 @@
 import { Plate } from '@udecode/plate';
+import styled from '@emotion/styled';
 import Navbar from '../components/Navbar';
-import {
-  createBasicMarksPlugin,
-  createBlockquotePlugin,
-  createHeadingPlugin,
-  createLinkPlugin,
-  createListPlugin,
-  createParagraphPlugin,
-  createPlateUI,
-  createPlugins,
-  createTodoListPlugin,
-} from '@udecode/plate';
+import { createPlateUI, createPlugins } from '@udecode/plate';
+import { PLUGINS } from '@/components/SlateEditor/config/plugins';
 const initialValue = [
   { type: `h1`, children: [{ text: `Heading 1` }] },
   { type: `h2`, children: [{ text: `Heading 2` }] },
@@ -57,15 +49,7 @@ const initialValue = [
 const components = createPlateUI();
 
 const plugins = createPlugins(
-  [
-    createParagraphPlugin(),
-    createBlockquotePlugin(),
-    createTodoListPlugin(),
-    createHeadingPlugin(),
-    createLinkPlugin(),
-    createListPlugin(),
-    createBasicMarksPlugin(),
-  ],
+  [...PLUGINS.basicNodes, ...PLUGINS.listElements, ...PLUGINS.utils],
   {
     components,
   },
@@ -74,13 +58,21 @@ const About = () => {
   return (
     <div>
       <Navbar />
-      <Plate
-        plugins={plugins}
-        initialValue={initialValue}
-        id="readonly"
-        editableProps={{ readOnly: true }}
-      ></Plate>
+      <PlateEditor>
+        <h1>Render Plate Editor Contents</h1>
+        <Plate
+          plugins={plugins}
+          initialValue={initialValue}
+          id="readonly"
+          editableProps={{ readOnly: true }}
+        ></Plate>
+      </PlateEditor>
     </div>
   );
 };
+const PlateEditor = styled.div`
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+`;
 export default About;

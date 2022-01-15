@@ -10,7 +10,7 @@ import {
   createSoftBreakPlugin,
   createTodoListPlugin,
 } from '@udecode/plate';
-import { CONFIG } from '@/components/editor/config/config';
+import { CONFIG } from '@/components/SlateEditor/config/config';
 const listElements = createPlugins(
   [createListPlugin(), createTodoListPlugin()],
   { components: createPlateUI() },

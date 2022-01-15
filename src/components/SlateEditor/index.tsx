@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { createPlateUI, createPlugins, Plate } from '@udecode/plate';
-import BasicElementToolbarButtons from '@/components/editor/BasicElementToolbarButtons';
-import BasicMarkToolbarButtons from '@/components/editor/BasicMarkToolbar';
-import ListToolbarButtons from './editor/ListToolbarButtons';
-import { PLUGINS } from './editor/config/plugins';
+import BasicElementToolbarButtons from '@/components/SlateEditor/BasicElementToolbarButtons';
+import BasicMarkToolbarButtons from '@/components/SlateEditor/BasicMarkToolbar';
+import ListToolbarButtons from './ListToolbarButtons';
+import { PLUGINS } from './config/plugins';
 
 const Editor = () => {
   const editableProps = {

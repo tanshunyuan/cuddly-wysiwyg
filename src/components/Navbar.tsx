@@ -8,7 +8,8 @@ interface INavLink {
 const Navbar = () => {
   return (
     <Nav>
-      <NavLink href="/" name="Home" />
+      <NavLink href="/" name="Slate Editor" />
+      <NavLink href="/draftjs" name="Draft JS Editor" />
       <NavLink href="/about" name="About" />
       <NavLink href="/newTable" name="Table" />
     </Nav>
@@ -27,7 +28,9 @@ const NavLink = ({ href, name }: INavLink) => {
   );
 };
 
-const Nav = styled.nav``;
+const Nav = styled.nav`
+  padding: 1rem;
+`;
 const LinkItem = styled.a`
   padding: 1rem;
 `;

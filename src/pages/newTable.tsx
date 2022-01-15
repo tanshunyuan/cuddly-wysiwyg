@@ -1,7 +1,8 @@
 import Navbar from '@/components/Navbar';
 import styled from '@emotion/styled';
-import React, { MouseEventHandler, useState } from 'react';
-import TableData from '../lib/table.data';
+import React, { useState } from 'react';
+import TableData, { ITableData } from '../lib/table.data';
+import SelectionPreview from '../components/selectionPreview';
 
 const NewTable = () => {
   const newTableData = TableData.map((x) => {
@@ -9,6 +10,7 @@ const NewTable = () => {
     return x;
   });
   const [meme, setMeme] = useState(newTableData);
+  const [selected, setSelected] = useState<ITableData[]>([]);
 
   const handlePreviewOnChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -17,15 +19,31 @@ const NewTable = () => {
     const newMeme = meme.map((x) => {
       return { ...x, isChecked: checked };
     });
+    if (!checked) {
+      setSelected([]);
+    } else {
+      setSelected(newMeme);
+    }
     setMeme(newMeme);
     console.log(id, checked);
   };
+
   const handleServiceItemOnChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { id, checked } = event.target;
     const newShit = meme.map((x) => {
       if (x.id.toString() == id) {
+        if (checked) {
+          setSelected((prev) => {
+            return [...prev, x];
+          });
+        } else {
+          setSelected((prev) => {
+            const found = prev.filter((item) => item.id != x.id);
+            return found;
+          });
+        }
         return { ...x, isChecked: checked };
       } else {
         return x;
@@ -79,6 +97,9 @@ const NewTable = () => {
           })}
         </ServiceTableContent>
       </ServiceTable>
+      {selected.length > 0 && (
+        <SelectionPreview items={selected}></SelectionPreview>
+      )}
     </div>
   );
 };

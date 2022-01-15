@@ -1,4 +1,4 @@
-interface ITableData {
+export interface ITableData {
   id: number;
   title: string;
   ratings: number;

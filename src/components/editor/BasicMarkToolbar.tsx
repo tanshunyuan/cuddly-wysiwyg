@@ -3,16 +3,9 @@ import {
   MarkToolbarButton,
   MARK_BOLD,
   MARK_ITALIC,
-  MARK_STRIKETHROUGH,
-  MARK_UNDERLINE,
   usePlateEditorRef,
 } from '@udecode/plate';
-import {
-  FormatBold,
-  FormatItalic,
-  FormatStrikethrough,
-  FormatUnderlined,
-} from 'styled-icons/material';
+import { FormatBold, FormatItalic } from 'styled-icons/material';
 
 const BasicMarkToolbarButtons = () => {
   const editor = usePlateEditorRef();
@@ -26,14 +19,6 @@ const BasicMarkToolbarButtons = () => {
       <MarkToolbarButton
         type={getPluginType(editor, MARK_ITALIC)}
         icon={<FormatItalic />}
-      />
-      <MarkToolbarButton
-        type={getPluginType(editor, MARK_UNDERLINE)}
-        icon={<FormatUnderlined />}
-      />
-      <MarkToolbarButton
-        type={getPluginType(editor, MARK_STRIKETHROUGH)}
-        icon={<FormatStrikethrough />}
       />
     </>
   );

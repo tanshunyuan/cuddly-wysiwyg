@@ -8,7 +8,7 @@ const NewTable = () => {
   const newTableData = TableData.map((x) => {
     x.isChecked = false;
     return x;
-  });
+  }).filter((x) => x.id < 5);
   const [meme, setMeme] = useState(newTableData);
   const [selected, setSelected] = useState<ITableData[]>([]);
 

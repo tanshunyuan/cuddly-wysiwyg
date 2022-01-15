@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavLink href="/" name="Slate Editor" />
-      <NavLink href="/draftjs" name="Draft JS Editor" />
+      <NavLink href="/tiptap" name="TipTap Editor" />
       <NavLink href="/about" name="About" />
       <NavLink href="/newTable" name="Table" />
     </Nav>

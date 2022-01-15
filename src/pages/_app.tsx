@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import styled from '@emotion/styled';
 import '@/styles/global.css';
-
+import '@/styles/tiptapstyles.css';
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Container>

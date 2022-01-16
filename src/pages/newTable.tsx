@@ -9,6 +9,9 @@ const NewTable = () => {
     TableData.map((data) => ({ ...data, isChecked: false })),
   );
   const [selected, setSelected] = useState<ITableData[]>([]);
+  useEffect(() => {
+    setSelected(dataWCheckbox.filter((data) => data.isChecked));
+  }, [dataWCheckbox]);
   const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
     setDataWCheckbox((prevState) => {
@@ -19,9 +22,6 @@ const NewTable = () => {
       }));
     });
   };
-  useEffect(() => {
-    setSelected(dataWCheckbox.filter((data) => data.isChecked));
-  }, [dataWCheckbox]);
 
   const handleServiceItemChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -41,7 +41,6 @@ const NewTable = () => {
   return (
     <div>
       <Navbar />
-      <pre>{JSON.stringify(selected, null, 2)}</pre>
       <ServiceTable>
         <ServiceTableHeader>
           <ServiceTableRow>
@@ -90,8 +89,7 @@ const ServiceTable = styled.div``;
 const ServiceTableHeader = styled.div``;
 const ServiceTableContent = styled.div``;
 const ServiceTableRowWrapper = styled.div`
-  background-color: gray;
-  border-bottom: 1px solid black;
+  box-shadow: inset 0px -1px 0px #f0f0f0;
 `;
 const ServiceTableRow = styled.div`
   display: grid;

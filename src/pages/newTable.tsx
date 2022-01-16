@@ -1,69 +1,51 @@
 import Navbar from '@/components/Navbar';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TableData, { ITableData } from '../lib/table.data';
 import SelectionPreview from '../components/selectionPreview';
 
 const NewTable = () => {
-  const newTableData = TableData.map((x) => {
-    x.isChecked = false;
-    return x;
-  }).filter((x) => x.id < 5);
-  const [meme, setMeme] = useState(newTableData);
+  const [dataWCheckbox, setDataWCheckbox] = useState(
+    TableData.map((data) => ({ ...data, isChecked: false })),
+  );
   const [selected, setSelected] = useState<ITableData[]>([]);
-
-  const handlePreviewOnChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const { id, checked } = event.target;
-    const newMeme = meme.map((x) => {
-      return { ...x, isChecked: checked };
+  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    setDataWCheckbox((prevState) => {
+      console.log({ prevState });
+      return prevState.map((data) => ({
+        ...data,
+        isChecked: checked,
+      }));
     });
-    if (!checked) {
-      setSelected([]);
-    } else {
-      setSelected(newMeme);
-    }
-    setMeme(newMeme);
-    console.log(id, checked);
   };
+  useEffect(() => {
+    setSelected(dataWCheckbox.filter((data) => data.isChecked));
+  }, [dataWCheckbox]);
 
-  const handleServiceItemOnChange = (
+  const handleServiceItemChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const { id, checked } = event.target;
-    const newShit = meme.map((x) => {
-      if (x.id.toString() == id) {
-        if (checked) {
-          setSelected((prev) => {
-            return [...prev, x];
-          });
+    const { name, id, checked } = event.target;
+    console.log({ name, id, checked });
+    setDataWCheckbox((prevState) => {
+      return prevState.map((data) => {
+        if (data.id.toString() == id) {
+          return { ...data, isChecked: checked };
         } else {
-          setSelected((prev) => {
-            const found = prev.filter((item) => item.id != x.id);
-            return found;
-          });
+          return data;
         }
-        return { ...x, isChecked: checked };
-      } else {
-        return x;
-      }
+      });
     });
-    setMeme(newShit);
-
-    console.log(id, checked);
   };
   return (
     <div>
       <Navbar />
+      <pre>{JSON.stringify(selected, null, 2)}</pre>
       <ServiceTable>
         <ServiceTableHeader>
           <ServiceTableRow>
-            <Input
-              onChange={handlePreviewOnChange}
-              id="preview"
-              type="checkbox"
-            />
+            <Input onChange={handleSelectAll} id="selectAll" type="checkbox" />
             <ServiceTableHeaderCell>
               <p>Preview</p>
             </ServiceTableHeaderCell>
@@ -74,14 +56,14 @@ const NewTable = () => {
         </ServiceTableHeader>
 
         <ServiceTableContent>
-          {meme.map((x) => {
+          {dataWCheckbox.map((x) => {
             return (
               <ServiceTableRowWrapper key={x.id}>
                 <ServiceTableRow>
                   <Input
                     checked={x.isChecked}
                     id={`${x.id}`}
-                    onChange={handleServiceItemOnChange}
+                    onChange={handleServiceItemChange}
                     type="checkbox"
                   />
                   <ServiceTableCell>
@@ -104,9 +86,7 @@ const NewTable = () => {
   );
 };
 
-const ServiceTable = styled.div`
-  // max-width:546px;
-`;
+const ServiceTable = styled.div``;
 const ServiceTableHeader = styled.div``;
 const ServiceTableContent = styled.div``;
 const ServiceTableRowWrapper = styled.div`

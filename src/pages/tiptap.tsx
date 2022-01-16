@@ -6,10 +6,10 @@ import { useEditor, EditorContent, Editor } from '@tiptap/react';
 const TipTap = () => {
   const editor = useEditor({
     extensions: [
-      ...TIPTAP_CONFIG.extensions,
       Placeholder.configure({
         placeholder: `Type Something`,
       }),
+      ...TIPTAP_CONFIG.extensions,
     ],
   });
   return (

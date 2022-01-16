@@ -86,7 +86,9 @@ const NewTable = () => {
 };
 
 const ServiceTable = styled.div``;
-const ServiceTableHeader = styled.div``;
+const ServiceTableHeader = styled.div`
+  box-shadow: inset 0px -1px 0px #f0f0f0;
+`;
 const ServiceTableContent = styled.div``;
 const ServiceTableRowWrapper = styled.div`
   box-shadow: inset 0px -1px 0px #f0f0f0;

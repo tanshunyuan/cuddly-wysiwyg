@@ -1,21 +1,12 @@
 import Navbar from '@/components/Navbar';
+import { TIPTAP_CONFIG } from '@/components/TipTapEditor/config/config';
 import styled from '@emotion/styled';
 import Placeholder from '@tiptap/extension-placeholder';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
 const TipTap = () => {
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({
-        history: false,
-        strike: false,
-        dropcursor: false,
-        gapcursor: false,
-        code: false,
-        horizontalRule: false,
-        blockquote: false,
-        codeBlock: false,
-      }),
+      ...TIPTAP_CONFIG.extensions,
       Placeholder.configure({
         placeholder: `Type Something`,
       }),
@@ -32,7 +23,7 @@ const TipTap = () => {
           <EditorContent editor={editor} />
         </EditorContainer>
       </TipTapContainer>
-      <pre>{JSON.stringify(editor?.getHTML(), null, 2)}</pre>
+      <pre>{JSON.stringify(editor?.getJSON(), null, 2)}</pre>
     </div>
   );
 };

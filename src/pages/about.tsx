@@ -1,146 +1,15 @@
-import { Plate } from '@udecode/plate';
+// import { Plate } from '@udecode/plate';
 import styled from '@emotion/styled';
 import Navbar from '../components/Navbar';
 import { createPlateUI, createPlugins } from '@udecode/plate';
 import { PLUGINS } from '@/components/SlateEditor/config/plugins';
 import { EditorContent, useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-const initialValue = [
-  { type: `h1`, children: [{ text: `Heading 1` }] },
-  { type: `h2`, children: [{ text: `Heading 2` }] },
-  { type: `h3`, children: [{ text: `Heading 3` }] },
-  { children: [{ type: `p`, bold: true, text: `normal text` }] },
-  {
-    children: [
-      { type: `p`, text: `normal text with ` },
-      { type: `p`, text: `bold`, bold: true },
-    ],
-  },
-  {
-    children: [
-      { type: `p`, text: `normal text with ` },
-      { type: `p`, text: `bold`, bold: true },
-      { type: `p`, text: ` and ` },
-      { type: `p`, text: `italics`, italic: true },
-    ],
-  },
-  {
-    children: [
-      { text: `normal text with ` },
-      { text: `bold`, bold: true },
-      { text: ` and ` },
-      { text: `italics`, italic: true },
-      { text: ` and ` },
-      { text: `underline`, underline: true },
-    ],
-  },
-  {
-    children: [
-      { text: `normal text with ` },
-      { text: `bold`, bold: true },
-      { text: ` and ` },
-      { text: `italics`, italic: true },
-      { text: ` and ` },
-      { text: `underline`, underline: true },
-      { text: ` and ` },
-      { text: `strikethrough`, strikethrough: true },
-    ],
-  },
-];
-const TipTapDataJSON = {
-  type: `doc`,
-  content: [
-    {
-      type: `paragraph`,
-      content: [
-        {
-          type: `text`,
-          text: `something`,
-        },
-      ],
-    },
-    {
-      type: `paragraph`,
-      content: [
-        {
-          type: `text`,
-          text: `sio`,
-        },
-      ],
-    },
-    {
-      type: `paragraph`,
-      content: [
-        {
-          type: `text`,
-          marks: [
-            {
-              type: `bold`,
-            },
-          ],
-          text: `this is a text `,
-        },
-      ],
-    },
-    {
-      type: `bulletList`,
-      content: [
-        {
-          type: `listItem`,
-          content: [
-            {
-              type: `paragraph`,
-              content: [
-                {
-                  type: `text`,
-                  text: `this is a list`,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: `listItem`,
-          content: [
-            {
-              type: `paragraph`,
-              content: [
-                {
-                  type: `text`,
-                  text: `1fljds`,
-                },
-              ],
-            },
-            {
-              type: `bulletList`,
-              content: [
-                {
-                  type: `listItem`,
-                  content: [
-                    {
-                      type: `paragraph`,
-                      content: [
-                        {
-                          type: `text`,
-                          text: `shit`,
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
-const TipTapDataHTML = `<p>this is rather insane</p><p>dafug</p><ol><li><p>List lah</p><ol><li><p>inner list</p><ol><li><p>inner inner inner list</p></li></ol></li></ol></li></ol>`;
+import { Plate } from '@udecode/plate';
+import { plateInitialValue, TipTapDataJSON } from '@/lib/editor.data';
+import { TIPTAP_CONFIG } from '@/components/TipTapEditor/config/config';
+import { useEffect } from 'react';
 
 const components = createPlateUI();
-
 const plugins = createPlugins(
   [...PLUGINS.basicNodes, ...PLUGINS.listElements, ...PLUGINS.utils],
   {
@@ -151,20 +20,13 @@ const plugins = createPlugins(
 const About = () => {
   const editor = useEditor({
     editable: false,
-    extensions: [
-      StarterKit.configure({
-        history: false,
-        strike: false,
-        dropcursor: false,
-        gapcursor: false,
-        code: false,
-        horizontalRule: false,
-        blockquote: false,
-        codeBlock: false,
-      }),
-    ],
+    extensions: [...TIPTAP_CONFIG.extensions],
   });
-  editor?.commands.setContent(TipTapDataJSON);
+  useEffect(() => {
+    if (editor !== null) {
+      editor.commands.setContent(TipTapDataJSON);
+    }
+  }, [editor]);
   return (
     <div>
       <Navbar />
@@ -172,7 +34,7 @@ const About = () => {
         <h1>Render Plate Editor Contents</h1>
         <Plate
           plugins={plugins}
-          initialValue={initialValue}
+          initialValue={plateInitialValue}
           id="readonly"
           editableProps={{ readOnly: true }}
         ></Plate>

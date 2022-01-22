@@ -3,7 +3,10 @@ const selectionPreview = ({ items }: { items: any }) => {
   return (
     <Toolbar>
       <ToolbarStatus>
-        {items.length} record is selected: <Link>Delete</Link>
+        {items.length} record is selected:
+        <ToolbarLink type="button">
+          <span>Delete</span>
+        </ToolbarLink>
       </ToolbarStatus>
     </Toolbar>
   );
@@ -18,9 +21,15 @@ const ToolbarStatus = styled.div`
   justify-content: center;
   padding: 10px 20px;
 `;
-const Link = styled.button`
-  text-decoration: none;
-  border-bottom: 1px solid white;
+const ToolbarLink = styled.button`
+  cursor: pointer;
   margin-left: 1rem;
+  background: none;
+  color: white;
+  border: none;
+  outline: none;
+  span {
+    text-decoration: underline;
+  }
 `;
 export default selectionPreview;

@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import TableData, { ITableData } from '../lib/table.data';
-import SelectionPreview from '../components/selectionPreview';
+import SelectionPreview from '../components/SelectionPreview';
 
 const NewTable = () => {
   const [dataWCheckbox, setDataWCheckbox] = useState(
